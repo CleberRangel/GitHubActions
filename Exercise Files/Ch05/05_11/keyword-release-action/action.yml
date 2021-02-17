@@ -1,8 +1,0 @@
-name: 'Keyword Releaser 9000'
-description: 'Creates releases based on a keyword'
-runs:
-   using: 'docker'
-   image: 'Dockerfile'
-branding:
-   icon: 'gift'
-   color: 'blue'
