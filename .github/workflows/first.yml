@@ -10,7 +10,7 @@ jobs:
       - name: Step One
         uses: actions/checkout@v2
       - name: Step Two
-        run: echo Current date:$now
+        run: date
       
       
   job2:
@@ -20,7 +20,7 @@ jobs:
       - name: Step One
         uses: actions/checkout@v2
       - name: Step Two
-        run: echo My date %date%
+        run: date
         
   job3:
     name: Third Job
@@ -29,9 +29,7 @@ jobs:
       - name: Step One
         uses: actions/checkout@v2
       - name: Step Two
-        run: 
-          mydate=`date "+%Y-%m-%d";`
-          echo The date is:${mydate}
+        run: date
         
   job4:
     name: Forth Job
@@ -41,4 +39,4 @@ jobs:
       - name: Step One
         uses: actions/checkout@v2
       - name: Step Two
-        run: echo My Forth Current date:$now
+        run: date
