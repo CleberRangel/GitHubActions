@@ -15,5 +15,5 @@ jobs:
       - name: Upload artifact for windows
         uses: actions/upload-artifact@v1.0.0
         with:
-          name: windows
+          name: ${{ env.ARTIFACT_NAME }}
           path: ./${{ env.ARTIFACT_NAME }}.py
