@@ -20,7 +20,7 @@ jobs:
       - name: Step One
         uses: actions/checkout@v2
       - name: Step Two
-        run: date /t
+        run: echo My date %date%
         
   job3:
     name: Third Job
