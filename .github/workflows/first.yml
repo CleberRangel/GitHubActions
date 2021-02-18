@@ -10,7 +10,7 @@ jobs:
       - name: Step One
         uses: actions/checkout@v2
       - name: Step Two
-        run: echo "Current date:$now"
+        run: echo Current date:$now
       
       
   job2:
@@ -20,7 +20,10 @@ jobs:
       - name: Step One
         uses: actions/checkout@v2
       - name: Step Two
-        run: "echo Current time is %mydate%:%mytime%"
+        run:
+          for /F "tokens=2" %%i in ('date /t') do set mydate=%%i
+          set mytime=%time%
+          "echo Current time is %mydate%:%mytime%"
         
   job3:
     name: Third Job
@@ -29,7 +32,9 @@ jobs:
       - name: Step One
         uses: actions/checkout@v2
       - name: Step Two
-        run: echo "Current date:$now"
+        run: 
+          mydate=`date "+%Y-%m-%d";`
+          echo The date is:${mydate}
         
   job4:
     name: Forth Job
@@ -39,4 +44,4 @@ jobs:
       - name: Step One
         uses: actions/checkout@v2
       - name: Step Two
-        run: echo "My Forth Current date:$now"
+        run: echo My Forth Current date:$now
