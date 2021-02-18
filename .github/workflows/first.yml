@@ -3,7 +3,7 @@ name: first
 on: push
 
 env:
-  ARTIFACT_NAME: Oh My
+  ARTIFACT_NAME: 100daysofcode
 
 jobs:
   upload: 
@@ -16,4 +16,4 @@ jobs:
         uses: actions/upload-artifact@v1.0.0
         with:
           name: windows
-          path: ./${{ env.ARTIFACT_NAME }}.exe
+          path: ./${{ env.ARTIFACT_NAME }}.py
