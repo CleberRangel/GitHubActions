@@ -3,7 +3,7 @@ name: first
 on: push
 
 jobs:
-  job1: 
+  ubuntu: 
     name: First Job
     runs-on: ubuntu-latest
     steps:
@@ -13,7 +13,7 @@ jobs:
         run: date
       
       
-  job2:
+  windows:
     name: Second Job
     runs-on: windows-latest
     steps:
@@ -22,7 +22,7 @@ jobs:
       - name: Step Two
         run: date
         
-  job3:
+  macos:
     name: Third Job
     runs-on: macos-latest
     steps:
@@ -31,10 +31,10 @@ jobs:
       - name: Step Two
         run: date
         
-  job4:
+  depends:
     name: Forth Job
     runs-on: macos-latest
-    needs: [job1, job2, job3]
+    needs: [ubuntu, windows, macos]
     steps:
       - name: Step One
         uses: actions/checkout@v2
