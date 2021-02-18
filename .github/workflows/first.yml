@@ -10,7 +10,7 @@ jobs:
       - name: Step One
         uses: actions/checkout@v2
       - name: Step Two
-        run: env | sort
+        run: echo "Current date:$now"
       
       
   job2:
@@ -20,4 +20,23 @@ jobs:
       - name: Step One
         uses: actions/checkout@v2
       - name: Step Two
-        run: "Get-ChildItem Env: | Sort-Object Name"
+        run: "echo Current time is %mydate%:%mytime%"
+        
+  job3:
+    name: Third Job
+    runs-on: macos-latest
+    steps:
+      - name: Step One
+        uses: actions/checkout@v2
+      - name: Step Two
+        run: echo "Current date:$now"
+        
+  job4:
+    name: Forth Job
+    runs-on: macos-latest
+    needs: [job1, job2, job3]
+    steps:
+      - name: Step One
+        uses: actions/checkout@v2
+      - name: Step Two
+        run: echo "My Forth Current date:$now"
