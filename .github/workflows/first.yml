@@ -2,37 +2,18 @@ name: first
 
 on: push
 
+env:
+  ARTIFACT_NAME: Oh My
+
 jobs:
-  ubuntu: 
+  upload: 
     runs-on: ubuntu-latest
     steps:
-      - name: Step One
+      - name: Checkout
         uses: actions/checkout@v2
-      - name: Step Two
-        run: date
-      
-      
-  windows:
-    runs-on: windows-latest
-    steps:
-      - name: Step One
-        uses: actions/checkout@v2
-      - name: Step Two
-        run: date
         
-  macos:
-    runs-on: macos-latest
-    steps:
-      - name: Step One
-        uses: actions/checkout@v2
-      - name: Step Two
-        run: date
-        
-  depends:
-    runs-on: macos-latest
-    needs: [ubuntu, windows, macos]
-    steps:
-      - name: Step One
-        uses: actions/checkout@v2
-      - name: Step Two
-        run: date
+      - name: Upload artifact for windows
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: windows
+          path: ./${{ env.ARTIFACT_NAME }}.exe
