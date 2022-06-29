@@ -6,6 +6,8 @@ on:
 env:
   ARTIFACT_NAME: MAUI.Installer
   PROJECT_PATH: src\MauiWithGitActions\MauiWithGitActions.csproj
+  PFX_ASC_FILE: cert.pfx.asc
+  PFX_FILE: cert.pfx
 
 jobs:
   Build: 
@@ -22,5 +24,18 @@ jobs:
       - name: Install MAUI Workload
         run: dotnet workload install maui
 
-      - name: Build app for release
-        run: dotnet build ${{env.PROJECT_PATH}} -c Release -f:net6.0-windows10.0.19041.0
+      - name: Decrypt PFX Certificate file
+        run: | 
+            echo ${{secrets.WINDOWS_PFX_FILE}} > ${{env.PFX_ASC_FILE}}
+            certutil -decode ${{env.PFX_ASC_FILE}} ${{env.PFX_FILE}}
+
+      - name: Add Cert to Windows Host
+        run: certutil -user -q -p ${{secrets.WINDOWS_PFX_PASSWORD}} -importpfx ${{env.PFX_FILE}} NoRoot
+
+      - name: Publish app for release
+        run: dotnet publish ${{env.PROJECT_PATH}} -c Release -f:net6.0-windows10.0.19041.0 /p:GenerateAppxPackageOnBuild=true /p:AppxPackageSigningEnabled=true /p:PackageCertificateThumbprint="${{secrets.WINDOWS_PFX_PRINT}}"
+      
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          path: .\**\AppPackages\**\*.*
