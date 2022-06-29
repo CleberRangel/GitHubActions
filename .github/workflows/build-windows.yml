@@ -1,7 +1,13 @@
 name: Continous Integration / Continous Delivery
 
 on: 
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      app_version:
+        description: 'App Version for release'
+        required: true
+        type: string
+
 
 env:
   ARTIFACT_NAME: MAUI.Installer
@@ -20,6 +26,10 @@ jobs:
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: '6.0.x'
+
+    # Add  MsBuild to the PATH: https://github.com/microsoft/setup-msbuild
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.1      
       
       - name: Install MAUI Workload
         run: dotnet workload install maui
@@ -35,15 +45,9 @@ jobs:
       - name: Publish app for release
         run: dotnet publish ${{env.PROJECT_PATH}} -c Release -f:net6.0-windows10.0.19041.0 /p:GenerateAppxPackageOnBuild=true /p:AppxPackageSigningEnabled=true /p:PackageCertificateThumbprint="${{secrets.WINDOWS_PFX_PRINT}}"
       
-      - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v3.1.0
-        with:
-          name: my-artifact
-          path: .\**\AppPackages\**\*.*
-      
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "my-artifact.zip"
-          tag: "1.0"
+          artifacts: .\**\AppPackages\**\*.msix
+          tag: ${{inputs.app_version}}
           token: ${{ secrets.GITHUB_TOKEN }}
