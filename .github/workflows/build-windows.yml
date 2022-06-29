@@ -31,7 +31,7 @@ jobs:
         run: dotnet workload install maui
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore    
+        run: dotnet build ${{env.PROJECT_PATH}} -c Release --no-restore    
 
       - name: Test
         run: dotnet test --no-restore --verbosity normal  
