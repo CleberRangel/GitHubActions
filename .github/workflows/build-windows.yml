@@ -30,6 +30,12 @@ jobs:
       - name: Install MAUI Workload
         run: dotnet workload install maui
 
+      - name: Build
+        run: dotnet build --configuration Release --no-restore    
+
+      - name: Test
+        run: dotnet test --no-restore --verbosity normal  
+
       - name: Decrypt PFX Certificate file
         run: | 
             echo "${{secrets.WINDOWS_PFX_FILE}}" > ${{env.PFX_ASC_FILE}}
@@ -44,6 +50,7 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: .\**\AppPackages\**\*.msix
+          artifacts: .\**\AppPackages\**\MauiWithGitActions*.msix
+          allowUpdates: true
           tag: ${{inputs.appVersion}}
           token: ${{ secrets.GITHUB_TOKEN }}
