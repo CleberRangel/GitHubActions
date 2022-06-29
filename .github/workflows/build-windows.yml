@@ -20,7 +20,7 @@ jobs:
           dotnet-version: '6.0.x'
       
       - name: Install MAUI Workload
-        run: dotnet workload install mau
+        run: dotnet workload install maui
 
       - name: Build app for release
         run: dotnet build ${{env.PROJECT_PATH}} -c Release -f:net6.0-windows10.0.19041.0
