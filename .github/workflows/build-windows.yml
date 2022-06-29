@@ -26,7 +26,7 @@ jobs:
 
       - name: Decrypt PFX Certificate file
         run: | 
-            echo ${{secrets.WINDOWS_PFX_FILE}} > ${{env.PFX_ASC_FILE}}
+            echo "${{secrets.WINDOWS_PFX_FILE}}" > ${{env.PFX_ASC_FILE}}
             certutil -decode ${{env.PFX_ASC_FILE}} ${{env.PFX_FILE}}
 
       - name: Add Cert to Windows Host
