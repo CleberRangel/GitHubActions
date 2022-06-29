@@ -30,6 +30,9 @@ jobs:
       - name: Install MAUI Workload
         run: dotnet workload install maui
 
+      - name: Install dependencies
+        run: dotnet restore
+
       - name: Build
         run: dotnet build ${{env.PROJECT_PATH}} -c Release --no-restore    
 
