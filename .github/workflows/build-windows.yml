@@ -30,14 +30,11 @@ jobs:
       - name: Install MAUI Workload
         run: dotnet workload install maui
 
-      - name: Install dependencies
-        run: dotnet restore ${{env.PROJECT_PATH}} 
-
       - name: Build
-        run: dotnet build ${{env.PROJECT_PATH}} -c Release --no-restore    
+        run: dotnet build ${{env.PROJECT_PATH}} -c Release  
 
       - name: Test
-        run: dotnet test --no-restore --verbosity normal  
+        run: dotnet test "src\MauiWithGitActions"  --no-restore --verbosity normal  
 
       - name: Decrypt PFX Certificate file
         run: | 
