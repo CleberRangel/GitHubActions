@@ -47,5 +47,5 @@ jobs:
         with:
           artifacts: .\**\AppPackages\**\MauiWithGitActions*.msix
           allowUpdates: true
-          tag: ${{ github.ref }}
+          tag: ${{ github.ref_name }}
           token: ${{ secrets.GITHUB_TOKEN }}

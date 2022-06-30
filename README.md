@@ -104,3 +104,7 @@ And upload the MSIX file to our repo Release page
 
 
 ![GitHub Release Page](/images/GitHub_Release_Page.png)
+
+The user can download the MauiWithGitActions file to install, however there a few things they neeed to do to be able to install it.
+
+Reference to the `PUBLISH` part of the article: [Publish a .NET MAUI app for Windows](https://docs.microsoft.com/en-us/dotnet/maui/windows/deployment/overview)
