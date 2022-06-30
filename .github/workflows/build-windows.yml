@@ -5,10 +5,7 @@ on:
     tags:
       - v*.*.*
 
-
-
 env:
-  ARTIFACT_NAME: MAUI.Installer
   PROJECT_PATH: src\MauiWithGitActions\MauiWithGitActions.csproj
   PFX_ASC_FILE: cert.pfx.asc
   PFX_FILE: cert.pfx
