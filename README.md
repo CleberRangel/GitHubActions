@@ -54,15 +54,6 @@ You also need of Secret with the `certificate thumbprint` and the `certificate p
 
 ## Explaining build-windows.yml
 
-Our file only runs when a new tag is pushed to the repo:
-
-```YML
-on: 
-  push:
-    tags:
-      - v*.*.*
-```
-
 We have a few enviroment variables to facilite our life:
 
 ```YML

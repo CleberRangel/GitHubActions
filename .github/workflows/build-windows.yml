@@ -3,7 +3,7 @@ name: Continous Integration / Continous Delivery
 on: 
   push:
     tags:
-      - v*.*.*
+      - v*.*
 
 env:
   PROJECT_PATH: src\MauiWithGitActions\MauiWithGitActions.csproj
