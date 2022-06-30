@@ -1,12 +1,10 @@
 name: Continous Integration / Continous Delivery
 
 on: 
-  workflow_dispatch:
-    inputs:
-      appVersion:
-        description: 'App Version for release'
-        required: true
-        type: string
+  push:
+    tags:
+      - v*.*.*
+
 
 
 env:
@@ -52,5 +50,5 @@ jobs:
         with:
           artifacts: .\**\AppPackages\**\MauiWithGitActions*.msix
           allowUpdates: true
-          tag: ${{inputs.appVersion}}
+          tag: ${{ github.ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
